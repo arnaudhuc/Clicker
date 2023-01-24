@@ -5,4 +5,9 @@ using UnityEngine;
 public class Counter : MonoBehaviour
 {
   public int CounterValue;
+
+  public void SetCounterValue(int value)
+  {
+
+  }
 }

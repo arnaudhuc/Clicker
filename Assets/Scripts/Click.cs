@@ -14,6 +14,9 @@ public class Click : MonoBehaviour
   [SerializeField]
   private Counter Counter;
 
+  [SerializeField]
+  private BuyableObject? BuyableObject;
+
   private void Update()
   {
     TextCounter.text = "Click : " + Counter.CounterValue;
@@ -21,9 +24,18 @@ public class Click : MonoBehaviour
 
   private void OnMouseDown()
   {
-    print("Clicked From Mouse Down");
-    Counter.CounterValue += 1 * Multiplier;
-    gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+    if (BuyableObject != null && BuyableObject.isBuyable && BuyableObject.price >= Counter.CounterValue)
+    {
+      print("not Buyable");
+      BuyableObject.isBuyable = !(BuyableObject.isBuyable && BuyableObject.price >= Counter.CounterValue);
+    }
+    else
+    {
+      print("Clicked From Mouse Down");
+      Counter.CounterValue += 1 * Multiplier;
+      gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+    }
+
   }
 }
 
