@@ -6,16 +6,24 @@ using TMPro;
 public class Click : MonoBehaviour
 {
   [SerializeField]
-  public TMP_Text TextCounter;
-  public int Counter, Multiplier = 1;
+  private TMP_Text TextCounter;
+
+  [SerializeField]
+  private int Multiplier = 1;
+
+  [SerializeField]
+  private Counter Counter;
 
   private void Update()
   {
-    TextCounter.text = "Click : " + Counter;
+    TextCounter.text = "Click : " + Counter.CounterValue;
   }
 
-  public void OnClick()
+  private void OnMouseDown()
   {
-    Counter += 1 * Multiplier;
+    print("Clicked From Mouse Down");
+    Counter.CounterValue += 1 * Multiplier;
+    gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
   }
 }
+
