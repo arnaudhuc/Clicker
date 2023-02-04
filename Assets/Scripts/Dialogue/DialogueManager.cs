@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
   public TMP_Text nameText;
   public TMP_Text dialogueText;
   public Animator animator;
+  public int textSpeed = 50;
 
   // Start is called before the first frame update
   void Start()
@@ -36,6 +37,7 @@ public class DialogueManager : MonoBehaviour
       EndDialogue();
       return;
     }
+    textSpeed = 50;
     string sentence = sentences.Dequeue();
 
     StopAllCoroutines();
@@ -48,7 +50,7 @@ public class DialogueManager : MonoBehaviour
     foreach (char letter in sentence.ToCharArray())
     {
       dialogueText.text += letter;
-      System.Threading.Thread.Sleep(50);
+      System.Threading.Thread.Sleep(textSpeed);
       yield return null;
     }
   }
@@ -56,5 +58,10 @@ public class DialogueManager : MonoBehaviour
   void EndDialogue()
   {
     animator.SetBool("isOpen", false);
+  }
+
+  public void SetTextSpeedToMax()
+  {
+    textSpeed = 0;
   }
 }
